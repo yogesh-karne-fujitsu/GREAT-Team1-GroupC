@@ -33,7 +33,7 @@ border-radius: 15px;
 
 <form class="form" align="left" name="form1" method="post" action="rejectcourse">
 <div class="card card-details">
-<h2 class="card-header">Trainee Records</h2>
+<h2 class="card-header">Trainee records </h2>
     <table class="table table-hover">
                <tr>
                 <td><b>Employee Id:</b></td>
