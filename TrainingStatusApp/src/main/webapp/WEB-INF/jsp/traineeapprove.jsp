@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
@@ -208,10 +205,10 @@ to {
 		<br>
 		<tr>
 			<center1>
-			<td><label><b>APPROVER NAME :</b> </label> ${verifyname}</td>
-			<td><label><b>SUBMIT DATE :</b></label> ${verDate}</td>
-			<td><label><b>BATCH NAME :</b></label> ${empBatch}</td>
-			<td><label><b>EMPLOYEE ID :</b></label> ${empId}</td>
+			<td><label><b>APPROVER NAME :</b> </label> </td>
+			<td><label><b>SUBMIT DATE :</b></label> </td>
+			<td><label><b>BATCH NAME :</b></label> </td>
+			<td><label><b>EMPLOYEE ID :</b></label></td>
 			</center1>
 
 		</tr>
@@ -234,72 +231,7 @@ to {
 				
 		</tr>
 
-		<c:forEach items="${usersList}" var="user">
-			<form method="post" action="approve">
-
-
-				<tr>
-					<center5> <td1>
-					<input type="hidden" id="verNm" name="verNm" value="${verifyname}" /></td1>
-					<td2>
-					<input type="hidden" id="schId" name="schId" value="${srId}" /></td2> <td3>
-					<input type="hidden" id="verDt" name="verDt" value="${verDate}" /></td3>
-					<td4>
-					<input type="hidden" id="emBatch" name="emBatch"
-						value="${empBatch}" /></td4> <td5>
-					<input type="hidden" id="emId" name="emId" value="${empBatch}" /></td5> <td6>
-					<input type="hidden" id="empId" name="empId" value="${user.empId}" /></td6>
-
-					<td><c:out value="${user.empId}" /></td>
-					<td><c:out value="${user.empName}" /></td>
-					<td><c:out value="${user.mailId}" /></td>
-					<td7>
-					<input type="hidden" id="csId" name="csId" value="${user.courseId}" /></td7>
-					<td8>
-					<input type="hidden" id="testscore" name="testScore" value="${user.testScore}" /></td8>
-					<td><c:out value="${user.courseId}" /></td>
-					<td><c:out value="${user.courseName}" /></td>
-					<td><c:out value="${user.trainDate}" /></td>
-					<td><c:out value="${user.apName}" /></td>
-					<td><c:out value="${user.testScore}" /></td>
-
-					<td><img class="ImgThumbnail" src="${user.sImg}"
-						style="width: 100%; max-width: 300px"></td>
-					<td><img class="ImgThumbnail" src="${user.sbImg}" alt="sab"
-						style="width: 100%; max-width: 300px"></td>
-					<td><img class="ImgThumbnail" src="${user.tsImg}" alt="test"
-						style="width: 100%; max-width: 300px"></td>
-						
-					<td>
-						<button type="submit" class="btn btn-outline-success" value="A"
-							name="status">APPROVE</button>
-					</td>
-					<td>
-						<button class="btn btn-outline-danger" value="R" name="status">REJECT</button>
-					</td>
-					<div class="modal">
-						<span class="close">&times;</span> <img class="modalImage"
-							id="img01">
-
-					</div>
-					</center5>
-				</tr>
-
-<script>
-var modalEle = document.querySelector(".modal");
-var modalImage = document.querySelector(".modalImage");
-Array.from(document.querySelectorAll(".ImgThumbnail")).forEach(item => {
-   item.addEventListener("click", event => {
-      modalEle.style.display = "block";
-      modalImage.src = event.target.src;
-   });
-});
-document.querySelector(".close").addEventListener("click", () => {
-   modalEle.style.display = "none";
-});
-</script>
-			</form>
-		</c:forEach>
+		
 
 	</table>
 
