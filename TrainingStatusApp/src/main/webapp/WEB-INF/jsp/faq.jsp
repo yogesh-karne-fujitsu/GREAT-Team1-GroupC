@@ -118,8 +118,6 @@ body
     justify-content: flex-end;
     padding: 25px;
     
-    
-
 }
 .container .tab label h3{
     position: relative;
@@ -252,14 +250,5 @@ body
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
 
