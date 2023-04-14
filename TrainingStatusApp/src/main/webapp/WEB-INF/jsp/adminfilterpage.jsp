@@ -144,39 +144,9 @@
             </td>
           </tr>
           <tr>
-            <td>  <label><b>Employee Id : </b></label></td>
+            td>  <label><b>Employee Id : </b></label></td>
   <td><input list="empID" name="empID"></td>
- <datalist id="empID">
  
-		
-			<%
-				try{
-					//Class.forName("com.mysql.jdbc.Driver");
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/login_demo","root","welcome@123");
-					Statement stat= con.createStatement();
-					String query="select distinct emp_id from user ";
-				
-					ResultSet rel=stat.executeQuery(query);
-			
-					while(rel.next())
-					{
-						String empId= ""+rel.getString("emp_id");
-						System.out.println(empId);
-						
-			%>
-					<option value="<%=empId%>"> <%=empId%></option>
-					
-			<%
-					}
-					con.close();					
-				}
-				catch(Exception e)
-				{
-					
-				}
-
-			%>
-	</datalist>
 			
 			    
 
