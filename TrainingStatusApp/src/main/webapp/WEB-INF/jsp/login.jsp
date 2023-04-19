@@ -114,6 +114,8 @@ padding : 25px;
 </head>
 
 <body>
+
+
 <div class = "hero">
 <div class = "form-box">    
       <div class = "button-box">
@@ -122,6 +124,7 @@ padding : 25px;
          <button type = "button" class = "toggle-btn" onclick = "adminid()">Admin</button>
       </div>  
       
+    <form method= "POST">  
  <form id = "empid" class = "input-group">
  <label for="empid" id = "empalignment"><b>Id </b></label>
  <input type = "text" name = "empid" class = "input-field" placeholder = "Employee Id"  required>
@@ -129,6 +132,8 @@ padding : 25px;
  <input type = "password"  name = "password" class = "input-field" placeholder = "Password"  required>
 
  <button type= "search" class = "submit-btn">Log In</button>
+ <br>
+ <h2>${errorMsg}</h2>
 
  </form>
  
