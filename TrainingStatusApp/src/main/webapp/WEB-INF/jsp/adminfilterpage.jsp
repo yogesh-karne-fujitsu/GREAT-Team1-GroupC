@@ -120,8 +120,10 @@
             <td>
               <select name="approver">
                 <option value="" selected="selected">Select</option>
-                <option>Anandhan</option>
-                <option>Vishnu</option>
+                <option>Anandhan Shanmugam</option>
+                <option>Vishnu Phad</option>
+                <option>Bishwajeet Singh</option>
+                <option>Priyanka Kawale</option>
               </select>
             </td>
             <td>Batch :</td>
