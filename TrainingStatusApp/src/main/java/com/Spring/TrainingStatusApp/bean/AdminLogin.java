@@ -1,6 +1,7 @@
 package com.Spring.TrainingStatusApp.bean;
 
 public class AdminLogin {
+
 	private String adminuserId;
 	private String adminpassword;
 	
