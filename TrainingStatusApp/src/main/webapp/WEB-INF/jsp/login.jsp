@@ -1,7 +1,7 @@
- <html>
+<html>
 <head>
-    <title>Trainee and Admin login</title>
-    
+    <title>Log in</title>
+
 <style>
 *{
 margin : 0;
@@ -122,25 +122,28 @@ padding : 25px;
          <button type = "button" class = "toggle-btn" onclick = "adminid()">Admin</button>
       </div>  
       
- <form id = "empid" class = "input-group">
- <label for="empid" id = "empalignment"><b>Id </b></label>
- <input type = "text" name = "empid" class = "input-field" placeholder = "Employee Id"  required>
- <label for="password"><b>Password  </b></label>
- <input type = "password"  name = "password" class = "input-field" placeholder = "Password"  required>
 
- <button type= "search" class = "submit-btn">Log In</button>
+ <form id = "empid" class = "input-group" method="POST" action="traineelogin">
+ <label for="empid" id = "empalignment"><b>Id </b></label>
+ <input type = "text" name = "traineeuserId" class = "input-field" placeholder = "Employee Id"  required>
+ <label for="password"><b>Password  </b></label>
+ <input type = "password"  name = "traineepassword" class = "input-field" placeholder = "Password"  required>
+
+ <button type= "submit" class = "submit-btn">Log In</button>
 
  </form>
  
- <form id = "adminid" class = "input-group">
+ <form id = "adminid" class = "input-group" method="POST" action="Adminlogin">
  <label for="adminid" id = "adminalignment"><b>Id </b></label>
- <input type = "text" name = "adminid" class = "input-field" placeholder = "Admin Id"  required>
+ <input type = "text" name="adminuserId" class = "input-field" placeholder = "Admin Id"  required>
  <label for="password"><b>Password  </b></label>
- <input type = "password"  name = "password" class = "input-field" placeholder = "Password"  required>
+ <input type = "password"  name="adminpassword" class = "input-field" placeholder = "Password"  required>
  
  <button type= "submit" class = "submit-btn">Log In</button>
  </form>
+ <h3>${errorMsg}</h3>
 </div>
+
 </div>
 
 <script>
