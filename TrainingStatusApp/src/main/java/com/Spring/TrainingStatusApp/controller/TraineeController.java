@@ -1,15 +1,75 @@
 package com.spring.TrainingStatusApp.controller;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import com.Spring.TrainingStatusApp.bean.TraineeLogin;
+import com.Spring.TrainingStatusApp.bean.Trainee;
+import com.Spring.TrainingStatusApp.service.TraineeService;
+
+
 @Controller
-public class TraineeController 
-{
+public class TraineeController {
+
+	@Autowired
+	TraineeService TraineeService;
 	
-	@RequestMapping(value = "/login",method = RequestMethod.GET)
+
+	@RequestMapping(value = "/faq",method = RequestMethod.GET)
 	public String traineepage() {
-		return "login";
+		return "faq";
 		}
 
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String traineelogin(Model model) {
+		return "login";
+	}
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	@RequestMapping(value = "/traineelogin", method = RequestMethod.POST)
+	public String login(@ModelAttribute("traineelogin") TraineeLogin traineelogin, ModelMap model) 
+	{
+	String query="SELECT * FROM traineelogin WHERE u_name=? AND u_pass=?";
+	List<TraineeLogin> traineelogins=jdbcTemplate.query(query, new Object[] {traineelogin.getTraineeuserId(),traineelogin.getTraineepassword()},new BeanPropertyRowMapper<>(TraineeLogin.class));
+
+
+    if (!traineelogins.isEmpty()) {
+	System.out.println("4");
+	return "trainee";
+	} else {
+    model.put("errorMsg","Please Provide correct crendentials");
+	System.out.println("5");
+	return "login";
+	
+	}
+   	
+}
+	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
+	public String registerUser(@Validated @ModelAttribute(name = "user") Trainee trainee, BindingResult result, ModelMap model,
+			@RequestParam("emSrn") MultipartFile mailScrn, @RequestParam("sabaSrn") MultipartFile sabaScrn,
+			@RequestParam("testScrn") MultipartFile testScrn) throws IOException {
+		System.out.println("Control Handling image1");
+		System.out.println("Control Handling image2");
+		if (result.hasErrors()) {
+			return "trainee";
+		}
+		TraineeService.createNewTrainee(trainee, mailScrn, sabaScrn, testScrn);
+		model.put("successMsg", "Submitted Sucessfully..!");
+		return "trainee";
+	}
 }
