@@ -16,8 +16,8 @@ public class TraineeController
 		}
 	
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String EmployeeInfo(ModelMap model, @RequestParam String empid, @RequestParam String password) {
-		if(empid.equals("admin") && password.equals("root")) {
+	public String EmployeeInfo(ModelMap model, @RequestParam String traineeuserId, @RequestParam String traineepassword) {
+		if(traineeuserId.equals("admin") && traineepassword.equals("root")) {
 		return "EmployeeInfo";
 		}
 	model.put("errorMsg", "Please provide valid credentials");
@@ -25,3 +25,4 @@ public class TraineeController
 
 }
 }
+

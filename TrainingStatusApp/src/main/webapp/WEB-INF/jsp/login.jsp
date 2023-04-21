@@ -1,6 +1,6 @@
- <html>
+<html>
 <head>
-    <title>Trainee and Admin login</title>
+    <title>Log in</title>
     
 <style>
 *{
@@ -21,7 +21,6 @@ background: url(https://visualpharm.com/assets/40/Fujitsu-595b40b75ba036ed117d95
 body .hero{
 height : 100%;
 width : 100%;
-
 background-position : center;
 background-size : cover;
 position :relative;
@@ -30,10 +29,11 @@ position :relative;
 .form-box{
     width: 100%;
     max-width: 350px;
-    height : 400px;
+    height : 280px;
     position: relative;
     margin: 6% auto;
-    background:White;
+	background-color: hsla(0, 0%, 100%, 0.9) !important;
+	backdrop-filter: saturate(200%) blur(5px);
     padding : 5px;
     overflow: hidden;
 }
@@ -61,13 +61,13 @@ left : 0;
 position : absolute;
 width : 110px;
 height : 100%;
-background : #f44336;
-border-radius : 30px;
+background : #FF0000  ;
+border-radius : 50px;
 transition : .5s;
 }
 
 .input-group{
-top : 180px;
+top : 100px;
 position: absolute;
 width : 280px;
 transition : .5s;
@@ -109,13 +109,16 @@ padding : 25px;
 #adminalignment{
 padding : 25px;
 }
-
+.msgbox{
+padding-top :125px;
+padding-left:50px;
+color:red;
+}
 </style>
 </head>
 
 <body>
-
-
+ 
 <div class = "hero">
 <div class = "form-box">    
       <div class = "button-box">
@@ -124,29 +127,35 @@ padding : 25px;
          <button type = "button" class = "toggle-btn" onclick = "adminid()">Admin</button>
       </div>  
       
-    <form method= "POST">  
- <form id = "empid" class = "input-group">
- <label for="empid" id = "empalignment"><b>Id </b></label>
- <input type = "text" name = "empid" class = "input-field" placeholder = "Employee Id"  required>
- <label for="password"><b>Password  </b></label>
- <input type = "password"  name = "password" class = "input-field" placeholder = "Password"  required>
+      <div class="msgbox" >
+ <h3>${errorMsg}</h3>
+</div>
+      
+ <form id = "empid" class = "input-group" method="POST">
 
- <button type= "search" class = "submit-btn">Log In</button>
- <br>
- <h2>${errorMsg}</h2>
+ <input type = "text" name = "traineeuserId" class = "input-field" placeholder = "Employee Id"  required>
+
+ <input type = "password"  name = "traineepassword" class = "input-field" placeholder = "Password"  required>
+
+ <button type= "submit" class = "submit-btn">Log In</button>
 
  </form>
  
- <form id = "adminid" class = "input-group">
- <label for="adminid" id = "adminalignment"><b>Id </b></label>
- <input type = "text" name = "adminid" class = "input-field" placeholder = "Admin Id"  required>
- <label for="password"><b>Password  </b></label>
- <input type = "password"  name = "password" class = "input-field" placeholder = "Password"  required>
+ <form id = "adminid" class = "input-group" method="POST">
+
+ <input type = "text" name="adminuserId" class = "input-field" placeholder = "Admin Id"  required>
+
+ <input type = "password"  name="adminpassword" class = "input-field" placeholder = "Password"  required>
  
  <button type= "submit" class = "submit-btn">Log In</button>
+
  </form>
+
 </div>
+
 </div>
+
+
 
 <script>
 var x = document.getElementById("empid");
