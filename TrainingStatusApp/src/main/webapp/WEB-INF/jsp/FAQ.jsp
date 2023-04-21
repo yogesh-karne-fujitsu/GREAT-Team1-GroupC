@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -118,6 +115,8 @@ body
     justify-content: flex-end;
     padding: 25px;
     
+    
+
 }
 .container .tab label h3{
     position: relative;
@@ -141,6 +140,7 @@ body
     border-radius: 2px;
     box-shadow: 0 5px 15px rgba (0, 0, 0, 0.5);
     padding-bottom: 5px;
+
 }
 .container .tab .content{
     max-height: 0;
@@ -168,9 +168,8 @@ body
    </style>
 </head>
 <body> 
-
     <div class="container">
-       <h1>Frequently Asked Questions?</h1>
+       <h1>Frequently Asked Questions</h1>
        <div class="tab">
         <input type="radio" name="acc" id="acc1">
         <label for="acc1">
@@ -244,10 +243,8 @@ body
         </label>
         <div class="content"><p>Contact the admin team or approver.</p></div>
        </div>
-        <p>&copy; Fujitsu India Ltd 2023</p>
+        <p>&copy; Fujitsu 2022</p>
    
     </div>
 </body>
 </html>
-
-

@@ -131,7 +131,7 @@ color:red;
  <h3>${errorMsg}</h3>
 </div>
       
- <form id = "empid" class = "input-group" method="POST">
+ <form id = "empid" class = "input-group" method="POST" action="traineelogin">
 
  <input type = "text" name = "traineeuserId" class = "input-field" placeholder = "Employee Id"  required>
 
@@ -141,7 +141,7 @@ color:red;
 
  </form>
  
- <form id = "adminid" class = "input-group" method="POST">
+ <form id = "adminid" class = "input-group" method="POST" action="Adminlogin">
 
  <input type = "text" name="adminuserId" class = "input-field" placeholder = "Admin Id"  required>
 
@@ -178,3 +178,4 @@ z.style.left = "0px";
 
 </body>
 </html>
+
