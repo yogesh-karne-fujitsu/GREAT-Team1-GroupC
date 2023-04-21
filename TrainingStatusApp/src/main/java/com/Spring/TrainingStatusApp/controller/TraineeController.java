@@ -28,6 +28,12 @@ public class TraineeController {
 	@Autowired
 	TraineeService TraineeService;
 	
+
+	@RequestMapping(value = "/faq",method = RequestMethod.GET)
+	public String traineepage() {
+		return "faq";
+		}
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String traineelogin(Model model) {
 		return "login";
@@ -40,6 +46,7 @@ public class TraineeController {
 	{
 	String query="SELECT * FROM traineelogin WHERE u_name=? AND u_pass=?";
 	List<TraineeLogin> traineelogins=jdbcTemplate.query(query, new Object[] {traineelogin.getTraineeuserId(),traineelogin.getTraineepassword()},new BeanPropertyRowMapper<>(TraineeLogin.class));
+
 
     if (!traineelogins.isEmpty()) {
 	System.out.println("4");
