@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -13,6 +14,7 @@
 <!-- Popper JS -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
 <script LANGUAGE="JavaScript">
 <!--
 	function confirmSubmit() {
@@ -24,6 +26,7 @@
 	}
 // -->
 </script>
+
 <style type="text/css">
 * {
 	font-family: serif;
@@ -198,6 +201,7 @@ nav li {
 </head>
 
 <body>
+
 
 	<nav>
 		<div class="logo">
@@ -386,4 +390,5 @@ nav li {
 
 
 </html>
+
 

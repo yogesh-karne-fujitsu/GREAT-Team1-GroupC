@@ -1,7 +1,7 @@
 package com.Spring.TrainingStatusApp.bean;
 
 public class TraineeLogin {
-	
+
 	private String traineeuserId;
 	private String traineepassword;
 	public String getTraineeuserId() {
@@ -21,4 +21,5 @@ public class TraineeLogin {
 		return "TraineeLogin [traineeuserId=" + traineeuserId + ", traineepassword=" + traineepassword + "]";
 	}
 	
+
 }

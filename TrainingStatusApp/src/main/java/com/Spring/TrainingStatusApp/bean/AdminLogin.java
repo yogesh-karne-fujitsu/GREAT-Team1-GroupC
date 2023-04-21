@@ -4,6 +4,7 @@ public class AdminLogin {
 	private String adminuserId;
 	private String adminpassword;
 	
+
 	public String getAdminuserId() {
 		return adminuserId;
 	}

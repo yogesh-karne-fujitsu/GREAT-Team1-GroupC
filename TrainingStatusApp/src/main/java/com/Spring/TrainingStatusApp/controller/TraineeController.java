@@ -1,4 +1,4 @@
-package com.Spring.TrainingStatusApp.controller;
+package com.spring.TrainingStatusApp.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.Spring.TrainingStatusApp.bean.Trainee;
-import com.Spring.TrainingStatusApp.bean.TraineeLogin;
-import com.Spring.TrainingStatusApp.service.TraineeService;
+import com.spring.TrainingStatusApp.bean.Trainee;
+import com.spring.TrainingStatusApp.bean.TraineeLogin;
+import com.spring.TrainingStatusApp.service.TraineeService;
 @Controller
 public class TraineeController 
 {
