@@ -1,7 +1,6 @@
-package com.Spring.TrainingStatusApp.bean;
+package com.Spring.TrainingStatusApp.controller.bean;
 
 public class Trainee {
-
 	private String empId;
 	private String mailId;
 	private String empName;
@@ -17,7 +16,7 @@ public class Trainee {
 	private String tsImg;
 	private String testScore;
 	private String status;
-
+	
 	public String getEmpId() {
 		return empId;
 	}
@@ -110,8 +109,7 @@ public class Trainee {
 	}
 	@Override
 	public String toString() {
-
-		return "Trainee [empId=" + empId + ", mailId=" + mailId + ", empName=" + empName + ", batch=" + batch
+		return "TraineeDataIn [empId=" + empId + ", mailId=" + mailId + ", empName=" + empName + ", batch=" + batch
 				+ ", trainDate=" + trainDate + ", srDate=" + srDate + ", enDate=" + enDate + ", courseId=" + courseId
 				+ ", courseName=" + courseName + ", apName=" + apName + ", sImg=" + sImg + ", sbImg=" + sbImg
 				+ ", tsImg=" + tsImg + ", testScore=" + testScore + ", status=" + status + "]";

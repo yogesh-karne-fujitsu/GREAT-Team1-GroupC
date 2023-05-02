@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Log in</title>
-
+    
 <style>
 *{
 margin : 0;
@@ -127,7 +127,6 @@ color:red;
          <button type = "button" class = "toggle-btn" onclick = "adminid()">Admin</button>
       </div>  
       
-
       <div class="msgbox" >
  <h3>${errorMsg}</h3>
 </div>
@@ -144,17 +143,13 @@ color:red;
  
  <form id = "adminid" class = "input-group" method="POST" action="Adminlogin">
 
-
  <input type = "text" name="adminuserId" class = "input-field" placeholder = "Admin Id"  required>
-
 
  <input type = "password"  name="adminpassword" class = "input-field" placeholder = "Password"  required>
  
  <button type= "submit" class = "submit-btn">Log In</button>
 
  </form>
-
-
 
 </div>
 

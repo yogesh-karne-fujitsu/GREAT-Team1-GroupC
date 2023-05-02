@@ -1,6 +1,17 @@
 
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
+<script type="text/javascript">
+  <!--
+      function getValue() {
+      var retVal = prompt("Enter your Reason for rejection : ", "Type here");
+            }
+         //-->
+ </script>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -88,14 +99,8 @@ tr, center5 { <
 }
 
 body {
-	background-color: rgb(234, 232, 232);
+	background-color: rgb(245, 245, 245);
 	padding: 3%;
-	background: url(https://cdn.dribbble.com/users/3419046/screenshots/15428526/fujitsu-800_600.gif);
-    background-color: rgb(234, 232, 232); 
-    background-size: 180px 100px;
-    background-position:  right top;
-    background-repeat: no-repeat;
-    padding: 2%;  
 }
 
 }
@@ -195,9 +200,9 @@ to {
 }
 </style>
 <body class="container-fluid">
-<form id="Back" align="left" method="GET" action="Back">
+<form id="Back" align="left" method="GET" action="Backtoemployeeinfo">
  		<button type="Back" class="btn btn btn-info btn-m">Back</button>
-  	</form>
+  </form>
 	<h2 class="card-header" style="background-color: D3d3d3">Trainee
 		Records</h2>
 	<table class="table table-hover"
@@ -205,10 +210,8 @@ to {
 		<br>
 		<tr>
 			<center1>
-			<td><label><b>APPROVER NAME :</b> </label> </td>
-			<td><label><b>SUBMIT DATE :</b></label> </td>
-			<td><label><b>BATCH NAME :</b></label> </td>
-			<td><label><b>EMPLOYEE ID :</b></label></td>
+			<td><label><b>SUBMIT DATE :</b></label> ${verDate}</td>
+			<td><label><b>EMPLOYEE ID :</b></label> ${empId}</td>
 			</center1>
 
 		</tr>
@@ -224,14 +227,69 @@ to {
 			<td style=" text-align:center"><b><label>COURSE NAME</label></b></td>
 			<td style=" text-align:center"><b><label>SUBMITTED DATE</label></b></td>
 			<td style=" text-align:center"><label><b>APPROVER NAME</b></label></td>
-			<td style=" text-align:center"><label><b>TEST SCORE</b></label></td>
 			<td style=" text-align:center"><label><b>SABA SCREENSHOT</b></label></td>
 			<td style=" text-align:center"><label><b>MAIL SCREENSHOT</b></label></td>
 			<td style=" text-align:center"><label><b>TEST SCREENSHOT</b></label></td>
-				
+			<td style=" text-align:center"><label><b>Status</b></label></td>
 		</tr>
 
-		
+		<c:forEach items="${usersList}" var="user">
+			<form method="post" action="approve">
+
+
+				<tr>
+					<center5> <td1>
+					<input type="hidden" id="verNm" name="verNm" value="${verifyname}" /></td1>
+					<td2>
+					<input type="hidden" id="schId" name="schId" value="${srId}" /></td2> <td3>
+					<input type="hidden" id="verDt" name="verDt" value="${verDate}" /></td3>
+					<td4>
+					<input type="hidden" id="emBatch" name="emBatch"
+						value="${empBatch}" /></td4> <td5>
+					<input type="hidden" id="emId" name="emId" value="${empBatch}" /></td5> <td6>
+					<input type="hidden" id="empId" name="empId" value="${user.empId}" /></td6>
+
+					<td><c:out value="${user.empId}" /></td>
+					<td><c:out value="${user.empName}" /></td>
+					<td><c:out value="${user.mailId}" /></td>
+					<td7>
+					<input type="hidden" id="csId" name="csId" value="${user.courseId}" /></td7>
+					<td><c:out value="${user.courseId}" /></td>
+					<td><c:out value="${user.courseName}" /></td>
+					<td><c:out value="${user.trainDate}" /></td>
+					<td><c:out value="${user.apName}" /></td>
+					
+
+					<td><img class="ImgThumbnail" src="${user.sImg}"
+						style="width: 100%; max-width: 300px"></td>
+					<td><img class="ImgThumbnail" src="${user.sbImg}" alt="sab"
+						style="width: 100%; max-width: 300px"></td>
+					<td><img class="ImgThumbnail" src="${user.tsImg}" alt="test"
+						style="width: 100%; max-width: 300px"></td>
+						<td><c:out value="${user.status}" /></td>
+					
+					<div class="modal">
+						<span class="close">&times;</span> <img class="modalImage"
+							id="img01">
+					</div>
+					</center5>
+				</tr>
+
+<script>
+var modalEle = document.querySelector(".modal");
+var modalImage = document.querySelector(".modalImage");
+Array.from(document.querySelectorAll(".ImgThumbnail")).forEach(item => {
+   item.addEventListener("click", event => {
+      modalEle.style.display = "block";
+      modalImage.src = event.target.src;
+   });
+});
+document.querySelector(".close").addEventListener("click", () => {
+   modalEle.style.display = "none";
+});
+</script>
+			</form>
+		</c:forEach>
 
 	</table>
 

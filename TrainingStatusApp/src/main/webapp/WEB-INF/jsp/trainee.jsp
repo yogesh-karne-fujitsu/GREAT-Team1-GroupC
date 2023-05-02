@@ -1,3 +1,10 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 
@@ -14,7 +21,6 @@
 <!-- Popper JS -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-
 <script LANGUAGE="JavaScript">
 <!--
 	function confirmSubmit() {
@@ -26,7 +32,6 @@
 	}
 // -->
 </script>
-
 <style type="text/css">
 * {
 	font-family: serif;
@@ -35,7 +40,7 @@
 }
 
 body {
-	background-color: rgb(234, 232, 232);
+	background-color: rgb(245, 245, 245);
 	background-repeat: no-repeat;
 	padding: 0%;
 }
@@ -92,7 +97,7 @@ select {
 .card {
 	height: 850px;
 	padding-left: 20px;
-	background-color: rgb(234, 232, 232);
+	background-color: rgb(245, 245, 245);
 	background-repeat: no-repeat;
 	box-shadow: 5px 5px 5px 5px grey;
 	background-size: 115% 115%, 20% 20%;
@@ -202,7 +207,6 @@ nav li {
 
 <body>
 
-
 	<nav>
 		<div class="logo">
 			<p>Fujitsu</p>
@@ -222,8 +226,8 @@ nav li {
 				</form>
 			</li> &nbsp;
 			<li>
-				<form id="Back" align="right" method="POST" action="adminlogin">
-					<button type="login" class="btn btn btn-danger btn-m">Admin</button>
+				<form id="Back" align="right" method="GET" action="logoutToTrainee">
+					<button type="login" class="btn btn btn-danger btn-m">Logout</button>
 				</form>
 			</li>
 		</ul>
@@ -235,7 +239,7 @@ nav li {
 	<br>
 
 
-	<form:form method="post" modelAttribute="user"
+	<form:form method="post" action ="trainee" modelAttribute="trainee"
 		enctype="multipart/form-data">
 		<div class="card">
 			<div align="left">
@@ -244,42 +248,32 @@ nav li {
 				</div>
 				<table style="width: 50%;" table table-hover";align="left">
 					<tr>
-						<td class="empid"><b>Employee ID</b><span class="text-dark">*</span></td>
-						<td class="empidInput"><form:input path="empId"
-								placeholder="Emp Id" /> <form:errors path="empId"
-								cssClass="error" /></td>
+						<td class="empid"><label><b>Employee Id </b><span class="text-dark">*</span></label></td>
+						<td><input id="employeeId" list="employeeDataList" name="empId" 
+						placeholder="employee Id" required>
+							<datalist id="employeeDataList">
 
+							<c:forEach items="${employeeIdList}" var="employeeId">
+							</c:forEach>
+
+						</datalist> </td>
+						
 
 						<td class="emailId"><b>Email ID</b><span class="text-dark">*</span></td>
-						<td class="emailIdInput"><form:input path="mailId"
-								placeholder="username@fujitsu.com" required='true' /> <form:errors
-								path="mailId" cssClass="error" /></td>
+						<td><input name="mailId" id="maillid"
+							placeholder="mail Id" required></td>
 					</tr>
 
 					<tr>
 						<td class="empName"><b>Employee Name</b><span
 							class="text-dark">*</span></td>
-						<td class="empNameInput"><input type="text" name="empName"
-							placeholder="Name" required /></td>
+						<td><input name="empName" id="employeeName"
+							placeholder="Employee Name" required></td>
 						<br>
-						<td class="batch"><b>Batch</b><span class="text-dark">*</span></td>
-						<td style="padding-left: 30px"><select class="sel"
-							name="batch" required>
-								<option value="" selected="selected">Select Batch</option>
-								<option>January</option>
-								<option>February</option>
-								<option>March</option>
-								<option>April</option>
-								<option>May</option>
-								<option>June</option>
-								<option>July</option>
-								<option>August</option>
-								<option>September</option>
-								<option>October</option>
-								<option>November</option>
-								<option>December</option>
-
-						</select></td>
+					<td class="batch"><b>Batch</b><span class="text-dark">*</span></td>
+						<td style="padding-left: 30px">
+						<input name="batch" id="batch"
+							placeholder="Batch" required></td>
 				</table>
 				<br>
 				<div align="left">
@@ -288,7 +282,7 @@ nav li {
 				<table style="width: 50%;" class="table table-hover">
 					<tr>
 						<td><b>Training Date</b><span class="text-dark">*</span></td>
-						<td><input type="Date" name="trainDate" value="" required /></td>
+						<td><input id="trdate" type="Date" name="trainDate" value="" required /></td>
 						<td><b>Start date</b><span class="text-dark">*</span></td>
 						<td><input type="Date" name="srDate" value="" required />
 						<td>
@@ -334,18 +328,54 @@ nav li {
 				</table>
 				<table class="app">
 					<tr>
-						<td><b>Approver Name</b><span class="text-dark">*</span></td>
-						<td><select name="apName" required>
-								<option value="" selected="selected">Select</option>
-								<option>Anandhan</option>
-								<option>Vishnu</option>
-						</select></td>
+               <td><b>Approver Name:</b><span class="text-dark">*</span></td>
+               <td><input list="apName" name="apName"  placeholder="Approver Name"required>
+               <datalist id="apName">
+ <%
+				try{
+					//Class.forName("com.mysql.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/trainingstatusapp","root","RutuD@99");
+					Statement stat= con.createStatement();
+					String query="select approver_name from tblapprovers";
+				
+					ResultSet rel=stat.executeQuery(query);
+			
+					while(rel.next())
+					{
+						String apName= ""+rel.getString("approver_name");
+				
+					
+						System.out.println(apName);
+						
+			%>
+					<option value="<%=apName%>"> <%=apName%></option>
+					
+			<%
+					}
+					con.close();					
+				}
+				catch(Exception e)
+				{
+					
+				}
 
+			%>
+	</datalist>
+			
+			<% String val=request.getParameter("apName"); 
+				System.out.println(val);
+				
+				%>
+            </td>
 						<td>
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button type="submit" value='Submit' name='Submit'
 								class="btn btn-danger btn-m" onClick='return confirmSubmit()'>Submit</button>
 						</td>
+						 <td>
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <button type="reset"  class="btn btn-warning" >Clear</button>
+                         </td>
 					</tr>
 				</table>
 	</form:form>
@@ -371,7 +401,83 @@ nav li {
 		});
 	});
 </script>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
 
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("employeeName").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-name?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("employeeName").value = data;
+		});
+	});
+</script>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
+
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("employeeName").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-mail?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("maillid").value = data;
+		});
+	});
+</script>
+<script type="text/javascript">
+	$('#employeeId').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("employeeId");
+
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("batch").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-batch?employeeId=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("batch").value = data;
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$('#traindate').change(function() {
+		console.log("Inside");
+		var employeeIdField = document.getElementById("traindate");
+
+		if( employeeIdField.value == null || employeeIdField.value == "") {
+			alert("Select appropriate employee id")
+			document.getElementById("traindate").value = "";
+			return; 
+		}
+		
+		$.ajax({
+			url : "employee-trainings?traindate=" + employeeIdField.value,
+			context : document.body
+		}).done(function(data) {
+			document.getElementById("traindate").value = data;
+		});
+	});
+</script>
 <script type="text/javascript">
 	function validateFileType() {
 		var fileName = document.getElementById("fileName").value;
@@ -384,11 +490,4 @@ nav li {
 		}
 	}
 </script>
-
-
-
-
-
 </html>
-
-

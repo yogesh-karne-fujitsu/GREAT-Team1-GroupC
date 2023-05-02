@@ -1,11 +1,9 @@
-package com.Spring.TrainingStatusApp.bean;
+package com.Spring.TrainingStatusApp.controller.bean;
 
 public class AdminLogin {
-
 	private String adminuserId;
 	private String adminpassword;
 	
-
 	public String getAdminuserId() {
 		return adminuserId;
 	}
